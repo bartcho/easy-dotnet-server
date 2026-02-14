@@ -4,6 +4,7 @@ public static class FileTypes
 {
   public const string SolutionXExtension = ".slnx";
   public const string SolutionExtension = ".sln";
+  public const string SolutionFilterExtension = ".slnf";
 
   public const string CsProjectExtension = ".csproj";
   public const string CsFileExtension = ".cs";
@@ -22,9 +23,14 @@ public static class FileTypes
   public static bool IsSolutionXFile(string slnPath) => MatchExtension(slnPath, SolutionXExtension);
 
   /// <summary>
-  /// Checks whether the given path points to a Visual Studio solution file (.sln or .slnx).
+  /// Checks whether the given path points to a Visual Studio slnf file (solution filter)
   /// </summary>
-  public static bool IsAnySolutionFile(string slnPath) => IsSolutionFile(slnPath) || IsSolutionXFile(slnPath);
+  public static bool IsSolutionFilterFile(string slnPath) => MatchExtension(slnPath, SolutionFilterExtension);
+
+  /// <summary>
+  /// Checks whether the given path points to a Visual Studio solution file (.sln, .slnx, or .slnf).
+  /// </summary>
+  public static bool IsAnySolutionFile(string slnPath) => IsSolutionFile(slnPath) || IsSolutionXFile(slnPath) || IsSolutionFilterFile(slnPath);
 
   /// <summary>
   /// Checks whether the given path points to a C# project file (.csproj).
