@@ -7,6 +7,12 @@ public class VisualStudioLocator(IMemoryCache cache, IClientService clientServic
 {
   public async Task<string> GetVisualStudioMSBuildPath()
   {
+    // On Linux/macOS, use dotnet CLI instead of Visual Studio MSBuild
+    if (!OperatingSystem.IsWindows())
+    {
+      return "dotnet";
+    }
+
     var vsCommand = await cache.GetOrCreateAsync("MSBuildInfo", async entry =>
     {
       var result = await GetVisualStudioMSBuild();
